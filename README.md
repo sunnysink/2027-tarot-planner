@@ -10,6 +10,7 @@ moon phase, Mercury retrograde and eclipse for 2027. **67 events.**
 | `index.html` | The events page. Pick a time zone and the dates and times move with you |
 | `calendar/2027-astrology-events-all-day.ics` | All-day markers, dated Eastern. The one most people want |
 | `calendar/2027-astrology-events-times.ics` | Exact times, stored in UT, so each calendar renders it in its own zone |
+| `moon-calendar/index.html` | ⭐ Twelve month grids. Print it and you have the wall calendar |
 | `rituals/index.html` | ⭐ The premium version. Every event with a ritual |
 | `calendar/2027-astrology-events-rituals.ics` | ⭐ The premium calendar, rituals in the event descriptions |
 
@@ -23,6 +24,27 @@ far from Eastern will see a handful of dates a day out.
 day grid, so a 3am moon is easy to miss.
 
 Offer all-day as the main button and exact times as the alternative.
+
+## The moon calendar
+
+`moon-calendar/` renders all twelve months as grids, with every event plotted on
+the day it happens and listed underneath with its sign. It replaces three jobs
+that used to be done by hand:
+
+- the calendar section of the astrology guide
+- the printable twelve month wall calendar
+- the PDF, via print to PDF
+
+**Hit print and it lays out two months to a sheet**, six sheets, page breaks in
+the right places, backgrounds dropped.
+
+**The moons are drawn in CSS rather than typed as characters**, so every phase is
+the same size and none of it depends on a font being installed. New moon solid
+black, full moon gold, quarters gold on the correct side for the northern
+hemisphere, lunar eclipse a coppery blood moon with the shadow biting in, solar
+eclipse a dark centre with a corona. **Seasons carry their real zodiac glyph**,
+with `U+FE0E` appended so they stay monochrome instead of turning into colour
+emoji.
 
 ## The premium version
 
