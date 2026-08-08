@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 Ritual Calendar</title><style>
+
+  :root{
+    --ink:#27222c; --muted:#6f6374; --paper:#fff7fb; --paper-deep:#eef9f8;
+    --panel:#fffdfd; --line:rgba(139,115,148,0.2);
+    --rose:#f4c5d5; --rose-deep:#d889a5;
+    --teal:#248c90; --teal-soft:#d9f3f0;
+    --violet:#8560a7; --violet-soft:#efe6f8;
+    --gold:#c69b4b; --gold-soft:#f4e3bf;
+    --green:#698c72;
+    --glass:rgba(255,255,255,0.55); --glass-strong:rgba(255,255,255,0.72);
+    --glass-line:rgba(255,255,255,0.62);
+    --shadow:0 18px 52px rgba(74,44,84,0.14); --radius:8px;
+    --sans:"Segoe UI",Arial,sans-serif; --serif:Georgia,"Times New Roman",serif;
+    --mono:"Cascadia Mono","Courier New",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--sans); font-size:15px; line-height:1.5; color:var(--ink);
+    background:
+      linear-gradient(135deg, rgba(244,197,213,0.62) 0%, rgba(255,255,255,0) 34%),
+      linear-gradient(220deg, rgba(157,225,219,0.55) 0%, rgba(255,255,255,0) 38%),
+      linear-gradient(180deg,#fff8fc 0%,#f5fbfb 46%,#f8f0fb 100%);
+    background-attachment:fixed; min-height:100vh; padding:32px 18px 64px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto}
+  h1,h2,h3{line-height:1.08;letter-spacing:0}
+  h1{font-family:var(--serif);font-size:clamp(30px,5.2vw,46px);font-weight:400}
+  .lede{color:var(--muted);margin-top:10px;max-width:none}
+  .kicker{color:var(--teal);font-size:12px;text-transform:uppercase;font-weight:850;letter-spacing:0}
+
+  .surface,.band{border:1px solid var(--glass-line);border-radius:var(--radius);
+    background:var(--glass);backdrop-filter:blur(18px);box-shadow:0 12px 34px rgba(74,44,84,0.1)}
+  .band{padding:18px 20px;margin-top:18px}
+  .mini-card{border:1px solid var(--glass-line);border-radius:var(--radius);
+    background:rgba(255,255,255,0.54);backdrop-filter:blur(14px);
+    box-shadow:0 10px 24px rgba(74,44,84,0.08);padding:14px 16px}
+  .stack{display:grid;gap:12px}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+
+  .badge{display:inline-flex;align-items:center;border-radius:999px;min-height:28px;
+    padding:0 12px;font-size:12px;font-weight:800;background:rgba(255,255,255,0.54);
+    border:1px solid rgba(139,115,148,0.22)}
+  .btn{border-radius:var(--radius);min-height:36px;font-size:13px;font-weight:800;
+    border:1px solid rgba(139,115,148,0.22);background:rgba(255,255,255,0.58);
+    color:var(--ink);padding:0 15px;cursor:pointer;
+    transition:transform 140ms ease,border-color 140ms ease,background 140ms ease,box-shadow 140ms ease}
+  .btn:hover{transform:translateY(-1px);border-color:var(--teal);box-shadow:0 8px 18px rgba(74,44,84,0.12)}
+  .btn.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+  /* controls */
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+  .field{display:grid;gap:6px;flex:1 1 300px}
+  label{font-size:12px;font-weight:850;color:var(--teal);text-transform:uppercase}
+  select{font-family:var(--sans);font-size:15px;font-weight:800;color:var(--ink);
+    padding:10px 12px;border-radius:var(--radius);border:1px solid rgba(139,115,148,0.22);
+    background:rgba(255,255,255,0.72);width:100%;cursor:pointer}
+  select:focus{outline:none;border-color:var(--teal)}
+  .zonenote{font-size:13px;color:var(--muted);margin-top:10px}
+  .zonenote b{color:var(--ink)}
+
+  .filters{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+
+  /* month + rows */
+  .month{margin-top:22px}
+  .month h2{font-family:var(--serif);font-size:23px;font-weight:400;margin-bottom:2px}
+  .month .mcount{font-size:12px;color:var(--muted);font-weight:800}
+  .rows{margin-top:10px;display:grid;gap:7px}
+  .ev{display:grid;grid-template-columns:78px 96px 1fr;gap:14px;align-items:center;
+    border:1px solid var(--glass-line);border-radius:var(--radius);
+    background:rgba(255,255,255,0.54);backdrop-filter:blur(14px);
+    box-shadow:0 10px 24px rgba(74,44,84,0.08);padding:11px 15px;border-left-width:4px}
+  .ev .d{font-weight:850;font-size:15px}
+  .ev .t{font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .ev .n{font-weight:800}
+  .ev .sub{display:block;font-weight:400;font-size:12.5px;color:var(--teal);margin-top:3px}
+  .ev[data-k="new"]{border-left-color:var(--violet);background:linear-gradient(90deg,var(--violet-soft),rgba(255,255,255,0.54) 42%)}
+  .ev[data-k="full"]{border-left-color:var(--gold);background:linear-gradient(90deg,var(--gold-soft),rgba(255,255,255,0.54) 42%)}
+  .ev[data-k="eclipse"]{border-left-color:var(--rose-deep);background:linear-gradient(90deg,var(--rose),rgba(255,255,255,0.54) 42%)}
+  .ev[data-k="season"]{border-left-color:var(--green);background:linear-gradient(90deg,rgba(105,140,114,0.18),rgba(255,255,255,0.54) 42%)}
+  .ev[data-k="fq"]{border-left-color:var(--rose-deep);background:linear-gradient(90deg,rgba(244,197,213,0.45),rgba(255,255,255,0.54) 42%)}
+  .ev[data-k="lq"]{border-left-color:var(--teal);background:linear-gradient(90deg,var(--teal-soft),rgba(255,255,255,0.54) 42%)}
+  .ev[data-k^="merc"]{border-left-color:var(--violet);background:linear-gradient(90deg,rgba(133,96,167,0.14),rgba(255,255,255,0.54) 42%)}
+  .ev.star{box-shadow:0 12px 30px rgba(198,155,75,0.28);border-color:var(--gold)}
+  @media(max-width:600px){
+    .ev{grid-template-columns:1fr;gap:3px}
+    .ev .t{font-size:12px}
+  }
+
+  .key{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .kchip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;
+    background:rgba(255,255,255,0.54);border:1px solid rgba(139,115,148,0.22);
+    border-radius:999px;min-height:28px;padding:0 12px}
+  .sw{width:11px;height:11px;border-radius:3px;flex:none}
+
+  footer{margin-top:34px;font-size:12.5px;color:var(--muted);line-height:1.6}
+  footer b{color:var(--ink)}
+
+
+  .ritual{border:1px solid var(--glass-line);border-radius:var(--radius);
+    background:rgba(255,255,255,0.54);backdrop-filter:blur(14px);
+    box-shadow:0 10px 24px rgba(74,44,84,0.08);padding:17px 20px;border-left-width:4px}
+  .ritual + .ritual{margin-top:10px}
+  .rhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:9px}
+  .rhead .dt{font-family:var(--mono);font-size:12px;color:var(--teal);font-weight:800}
+  .rhead h3{font-family:var(--serif);font-size:21px;font-weight:400;line-height:1.1}
+  .rhead .tm{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-left:auto}
+  .ritual p{margin:0 0 8px;font-size:15px;line-height:1.55}
+  .ritual p:last-child{margin-bottom:0}
+  .ritual[data-k="new"]{border-left-color:var(--violet)}
+  .ritual[data-k="full"]{border-left-color:var(--gold)}
+  .ritual[data-k="eclipse"]{border-left-color:var(--rose-deep)}
+  .ritual[data-k="season"]{border-left-color:var(--green)}
+  .ritual[data-k="fq"]{border-left-color:var(--rose-deep)}
+  .ritual[data-k="lq"]{border-left-color:var(--teal)}
+  .ritual[data-k^="merc"]{border-left-color:var(--violet)}
+  .mh{font-family:var(--serif);font-size:27px;font-weight:400;margin:30px 0 12px}
+  @media print{body{background:#fff}.band{box-shadow:none}}
+
+</style></head><body><div class="wrap">
+<div class="band" style="margin-top:0;padding:26px">
+<div class="kicker">High Priestess Tarot School</div>
+<h1>Your 2027 Ritual Calendar</h1>
+<p class="lede">Every moon phase, season and retrograde of 2027, each with one ritual. <b>Under fifteen minutes, using what is already in your house.</b> Times are Eastern.</p></div>
+<h2 class="mh">January 2027</h2>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Jan 7</span><h3>🌑 New Moon in Capricorn</h3><span class="tm">3:24 PM ET</span></div><p>Write the goal on a small piece of paper and fold it once. Put it in the soil of a houseplant, or under a stone outside where it will not get moved.</p><p>You are not asking for it. You are putting it somewhere it can take its time.</p><p>Come back on July 18, when the full moon lands in Capricorn and shows you what grew.</p></div>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Jan 15</span><h3>🌓 First Quarter Moon in Aries</h3><span class="tm">3:34 PM ET</span></div><p>First quarter moons are the friction point. Something started and now it is harder.</p><p>Write the one thing you have been avoiding, then do the smallest version of it today.</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Jan 20</span><h3>✨ Aquarius Season Begins</h3><span class="tm">2:30 AM ET</span></div><p>Open a window, even for a minute, even in January.</p><p>Write down one thing you want to try that you have not seen anyone else doing. Then send one message to one person you have been meaning to reach.</p><p><em>One question to sit with this month:</em></p><p><strong>Where am I following a rule that nobody actually gave me?</strong></p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">Jan 22</span><h3>🌕 Full Moon in Leo</h3><span class="tm">7:17 AM ET</span></div><p>Light a candle and put it where you can see your own face.</p><p>Say out loud the one thing you have done this year that you are proud of. All the way through, no qualifier on the end.</p><p>Leo full moons are for being witnessed. If nobody is home, you count.</p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Jan 29</span><h3>🌗 Last Quarter Moon in Scorpio</h3><span class="tm">5:55 AM ET</span></div><p>Delete something. A photo, a draft, a number in your phone, a tab you have kept open for a month.</p><p>Write what it was holding for you.</p></div>
+<h2 class="mh">February 2027</h2>
+<div class="ritual" data-k="eclipse"><div class="rhead"><span class="dt">Feb 6</span><h3>☀️ Solar Eclipse in Aquarius</h3><span class="tm">11:00 AM ET</span></div><p>Eclipses are not for launching. The old advice is to wait a few days and let the ground settle, and it is good advice.</p><p>Light a candle, write down what you notice arriving or leaving, and do not make any decision today that you can make on Friday instead.</p></div>
+<div class="ritual" data-k="merc-begins"><div class="rhead"><span class="dt">Feb 9</span><h3>☿ Mercury Retrograde Begins in Pisces</h3><span class="tm">12:36 PM ET</span></div><p>Mercury stations retrograde today.</p><p>Back up the thing you would be sick to lose. Then pick one project you abandoned and read it again with fresh eyes.</p><p>This is a good three weeks for revisiting and a poor three weeks for launching.</p></div>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Feb 14</span><h3>🌓 First Quarter Moon in Taurus</h3><span class="tm">2:58 AM ET</span></div><p>Something you began has hit resistance. Write down whether the resistance is the world or your own comfort.</p><p>Pull one card: what is worth being stubborn about here?</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Feb 18</span><h3>✨ Pisces Season Begins</h3><span class="tm">4:34 PM ET</span></div><p>Put on the music you loved at seventeen and do nothing else while it plays.</p><p>Pisces season is the one that asks less of you. Let it.</p><p><em>One question to sit with this month:</em></p><p><strong>What am I ready to stop making sense of?</strong></p></div>
+<div class="ritual" data-k="eclipse"><div class="rhead"><span class="dt">Feb 20</span><h3>🌘 Lunar Eclipse in Virgo</h3><span class="tm">6:14 PM ET</span></div><p>Something reaches its end here, and it usually is not the thing you expected.</p><p>Sit with water nearby. Write what has quietly finished. Do not rush to replace it.</p><p>Pull one card: what is this making room for?</p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Feb 28</span><h3>🌗 Last Quarter Moon in Sagittarius</h3><span class="tm">12:16 AM ET</span></div><p>Write down one opinion you have carried for years that you have never actually examined.</p><p>Pull one card: what would I have to give up to change my mind?</p></div>
+<h2 class="mh">March 2027</h2>
+<div class="ritual" data-k="merc-ends"><div class="rhead"><span class="dt">Mar 3</span><h3>☿ Mercury Retrograde Ends in Aquarius</h3><span class="tm">7:32 AM ET</span></div><p>Mercury stations direct today.</p><p>Send the message, publish the thing, sign the paper. Give it a couple of days to pick up speed and then go.</p><p>Write down what you saw clearly while it was backwards.</p></div>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Mar 8</span><h3>🌑 New Moon in Pisces</h3><span class="tm">4:29 AM ET</span></div><p>Fill a bowl with water and set it where the light hits it.</p><p>Write what you want without deciding yet whether it is realistic. Pisces new moons are for the wish before the plan.</p><p>Pull one card: what is already true about this that I have been calling a daydream?</p><p>Come back on September 15, when the full moon lands in Pisces and shows you what grew.</p></div>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Mar 15</span><h3>🌓 First Quarter Moon in Gemini</h3><span class="tm">12:24 PM ET</span></div><p>Say the awkward thing. The message you have drafted and not sent, the question you keep almost asking.</p><p>Write what you are afraid the answer is, then send it anyway.</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Mar 20</span><h3>✨ Aries Season Begins</h3><span class="tm">4:25 PM ET</span></div><p>The astrological year starts here. Light a candle and write one sentence about who you intend to be by next spring.</p><p>Then do one thing today that person would do.</p><p><em>One question to sit with this month:</em></p><p><strong>What have I been waiting to be ready for?</strong></p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">Mar 22</span><h3>🌕 Full Moon in Libra</h3><span class="tm">6:43 AM ET</span></div><p>Write down one relationship that is out of balance and one that is right.</p><p>Say thank you to the second one today, in whatever way you actually would.</p><p>Pull one card: what is my part in the first one?</p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Mar 29</span><h3>🌗 Last Quarter Moon in Capricorn</h3><span class="tm">8:53 PM ET</span></div><p>Clear one work surface completely and do not put anything back that you do not use.</p><p>Write what you are ready to stop being responsible for.</p></div>
+<h2 class="mh">April 2027</h2>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Apr 6</span><h3>🌑 New Moon in Aries</h3><span class="tm">7:50 PM ET</span></div><p>Light a candle. Say the thing you want to start, out loud, in one sentence with no preamble.</p><p>Then do the smallest piece of it today. Aries does not want the plan, it wants the first move.</p><p>Come back on October 15, when the full moon lands in Aries and shows you what grew.</p></div>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Apr 13</span><h3>🌓 First Quarter Moon in Cancer</h3><span class="tm">6:56 PM ET</span></div><p>Check in on how you have actually been feeling, not how you have been reporting it.</p><p>Write it down without editing.</p><p>Pull one card: what do I need to ask for?</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Apr 20</span><h3>✨ Taurus Season Begins</h3><span class="tm">3:18 AM ET</span></div><p>Cook something from scratch, or make your bed properly, or sit outside with your shoes off.</p><p>Taurus season is for the body and the pace it actually wants.</p><p><em>One question to sit with this month:</em></p><p><strong>What in my life is worth slowing down for?</strong></p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">Apr 20</span><h3>🌕 Full Moon in Scorpio</h3><span class="tm">6:26 PM ET</span></div><p>Run a bath or a long shower. Take the question in with you.</p><p>What has this been costing me, and am I still willing to pay it?</p><p>Write the answer down while your hair is still wet. Scorpio full moons hand you the truth and then take it back if you wait.</p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Apr 28</span><h3>🌗 Last Quarter Moon in Aquarius</h3><span class="tm">4:17 PM ET</span></div><p>Leave a group, mute a thread, or step back from one thing you joined out of obligation.</p><p>Write what you get back.</p></div>
+<h2 class="mh">May 2027</h2>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">May 6</span><h3>🌑 New Moon in Taurus</h3><span class="tm">6:58 AM ET</span></div><p>Put your hands on something real. Soil, dough, wood, your own arms.</p><p>Write what you want to build that you intend to still have in five years.</p><p>Pull one card: what does this need from me that is steady rather than dramatic?</p><p>Come back on November 13, when the full moon lands in Taurus and shows you what grew.</p></div>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">May 13</span><h3>🌓 First Quarter Moon in Leo</h3><span class="tm">12:43 AM ET</span></div><p>Light a candle. Write down where you have gone quiet in the last two weeks.</p><p>Say one thing today that you would normally keep to yourself.</p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">May 20</span><h3>🌕 Full Moon in Scorpio</h3><span class="tm">6:58 AM ET</span></div><p>Run a bath or a long shower. Take the question in with you.</p><p>What has this been costing me, and am I still willing to pay it?</p><p>Write the answer down while your hair is still wet. Scorpio full moons hand you the truth and then take it back if you wait.</p><p>The second full moon in Scorpio this year. April's sat at 0 degrees, this one at 29.</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">May 21</span><h3>✨ Gemini Season Begins</h3><span class="tm">2:18 AM ET</span></div><p>Read something you would not normally read. Ask one person a question you have never asked them.</p><p>Gemini season runs on curiosity and it goes stale without new input.</p><p><em>One question to sit with this month:</em></p><p><strong>What am I curious about that I keep calling a distraction?</strong></p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">May 28</span><h3>🌗 Last Quarter Moon in Pisces</h3><span class="tm">9:57 AM ET</span></div><p>Take a long shower and let the day come off.</p><p>Write what you are ready to forgive, including anything of your own.</p></div>
+<h2 class="mh">June 2027</h2>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Jun 4</span><h3>🌑 New Moon in Gemini</h3><span class="tm">3:40 PM ET</span></div><p>Write the idea down three different ways on three scraps of paper. Keep the one that sounds like you talking.</p><p>Then say it to one person today. Gemini begins by being spoken.</p><p>Come back on December 13, when the full moon lands in Gemini and shows you what grew.</p></div>
+<div class="ritual" data-k="merc-begins"><div class="rhead"><span class="dt">Jun 10</span><h3>☿ Mercury Retrograde Begins in Cancer</h3><span class="tm">2:15 PM ET</span></div><p>Mercury stations retrograde today.</p><p>Back up the thing you would be sick to lose. Then pick one project you abandoned and read it again with fresh eyes.</p><p>This is a good three weeks for revisiting and a poor three weeks for launching.</p></div>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Jun 11</span><h3>🌓 First Quarter Moon in Virgo</h3><span class="tm">6:55 AM ET</span></div><p>Pick the one task that has been sliding and do it now, badly if necessary.</p><p>Then write what made it heavy. It is usually not the task.</p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">Jun 18</span><h3>🌕 Full Moon in Sagittarius</h3><span class="tm">8:44 PM ET</span></div><p>Go somewhere with a view, even if it is only a window.</p><p>Write what you believed in January that you no longer believe.</p><p>Pull one card: what did I learn that I have not admitted out loud yet?</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Jun 21</span><h3>✨ Cancer Season Begins</h3><span class="tm">10:11 AM ET</span></div><p>Make your home feel like yours this week. One room, one corner, one candle.</p><p>Cancer season is for the inside of your life rather than the outside of it.</p><p><em>One question to sit with this month:</em></p><p><strong>What would make me feel safer, and can I give myself that?</strong></p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Jun 27</span><h3>🌗 Last Quarter Moon in Aries</h3><span class="tm">12:54 AM ET</span></div><p>Write down a fight you are still having in your head.</p><p>Say the last line of it out loud, then let it be over. Last quarter moons are for putting the sword down.</p></div>
+<h2 class="mh">July 2027</h2>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Jul 3</span><h3>🌑 New Moon in Cancer</h3><span class="tm">11:01 PM ET</span></div><p>Make something warm to drink and sit with it somewhere you feel safe.</p><p>Write what you want to begin at home, or in your family, or inside yourself where nobody is watching.</p><p>Pull one card: what needs tending before this can grow?</p></div>
+<div class="ritual" data-k="merc-ends"><div class="rhead"><span class="dt">Jul 4</span><h3>☿ Mercury Retrograde Ends in Gemini</h3><span class="tm">3:39 PM ET</span></div><p>Mercury stations direct today.</p><p>Send the message, publish the thing, sign the paper. Give it a couple of days to pick up speed and then go.</p><p>Write down what you saw clearly while it was backwards.</p></div>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Jul 10</span><h3>🌓 First Quarter Moon in Libra</h3><span class="tm">2:38 PM ET</span></div><p>Somebody needs a yes or a no from you and you have been giving them a maybe.</p><p>Write which one it actually is.</p><p>Pull one card: what am I protecting by staying undecided?</p></div>
+<div class="ritual" data-k="eclipse"><div class="rhead"><span class="dt">Jul 18</span><h3>🌘 Lunar Eclipse in Capricorn</h3><span class="tm">12:04 PM ET</span></div><p>Something reaches its end here, and it usually is not the thing you expected.</p><p>Sit with water nearby. Write what has quietly finished. Do not rush to replace it.</p><p>Pull one card: what is this making room for?</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Jul 22</span><h3>✨ Leo Season Begins</h3><span class="tm">9:05 PM ET</span></div><p>Wear the thing you save for good. Today counts.</p><p>Leo season is for being seen on purpose rather than by accident.</p><p><em>One question to sit with this month:</em></p><p><strong>Where have I been dimming myself, and who did I think it was helping?</strong></p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Jul 26</span><h3>🌗 Last Quarter Moon in Taurus</h3><span class="tm">12:54 PM ET</span></div><p>Give one thing away. Something good, not something you were going to bin anyway.</p><p>Write what you were keeping it for.</p></div>
+<h2 class="mh">August 2027</h2>
+<div class="ritual" data-k="eclipse"><div class="rhead"><span class="dt">Aug 2</span><h3>☀️ Solar Eclipse in Leo</h3><span class="tm">6:07 AM ET</span></div><p>Eclipses are not for launching. The old advice is to wait a few days and let the ground settle, and it is good advice.</p><p>Light a candle, write down what you notice arriving or leaving, and do not make any decision today that you can make on Friday instead.</p><p>Total solar eclipse, one of the longest of the century.</p></div>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Aug 9</span><h3>🌓 First Quarter Moon in Scorpio</h3><span class="tm">12:53 AM ET</span></div><p>Write down what you suspect but have not confirmed.</p><p>Then decide whether you want to know. Both are allowed. Choose on purpose rather than by drifting.</p></div>
+<div class="ritual" data-k="eclipse"><div class="rhead"><span class="dt">Aug 17</span><h3>🌘 Lunar Eclipse in Aquarius</h3><span class="tm">3:14 AM ET</span></div><p>Something reaches its end here, and it usually is not the thing you expected.</p><p>Sit with water nearby. Write what has quietly finished. Do not rush to replace it.</p><p>Pull one card: what is this making room for?</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Aug 23</span><h3>✨ Virgo Season Begins</h3><span class="tm">4:15 AM ET</span></div><p>Fix one small broken thing you walk past every day.</p><p>Virgo season is not about fixing yourself. It is about making the day work better.</p><p><em>One question to sit with this month:</em></p><p><strong>What one system would make the rest of my life easier?</strong></p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Aug 24</span><h3>🌗 Last Quarter Moon in Gemini</h3><span class="tm">10:27 PM ET</span></div><p>Say the apology or the correction you have been putting off.</p><p>Write what you were afraid it would cost, then check whether that was true.</p></div>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Aug 31</span><h3>🌑 New Moon in Virgo</h3><span class="tm">1:40 PM ET</span></div><p>Clear one surface completely before you write anything. One drawer, one shelf, one corner of a desk.</p><p>Then write the one system you want to actually keep this year.</p><p>Virgo begins by making room.</p></div>
+<h2 class="mh">September 2027</h2>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Sep 7</span><h3>🌓 First Quarter Moon in Sagittarius</h3><span class="tm">2:30 PM ET</span></div><p>Go outside and walk until the question gets simpler.</p><p>Write what you would do if you trusted this to work.</p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">Sep 15</span><h3>🌕 Full Moon in Pisces</h3><span class="tm">7:03 PM ET</span></div><p>Fill a bowl with water. Say what you are ready to grieve or forgive into it, then pour it out on the ground or down the drain.</p><p>Pisces full moons dissolve things. Let this one.</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Sep 23</span><h3>✨ Libra Season Begins</h3><span class="tm">2:02 AM ET</span></div><p>Have the conversation you have been circling, or write the letter you are not going to send.</p><p>Libra season is for the relationships, including the one with yourself.</p><p><em>One question to sit with this month:</em></p><p><strong>Where is the balance off, and what is my part in it?</strong></p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Sep 23</span><h3>🌗 Last Quarter Moon in Cancer</h3><span class="tm">6:20 AM ET</span></div><p>Light a candle and write the name of something you are ready to stop carrying for your family.</p><p>Pull one card: what is mine to put down?</p></div>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Sep 29</span><h3>🌑 New Moon in Libra</h3><span class="tm">10:35 PM ET</span></div><p>Write two columns. What I want, and what I have been agreeing to.</p><p>Do not fix anything yet. Just look at the gap.</p><p>Pull one card: where does the balance need to move first?</p></div>
+<h2 class="mh">October 2027</h2>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Oct 7</span><h3>🌓 First Quarter Moon in Capricorn</h3><span class="tm">7:47 AM ET</span></div><p>Look at what you committed to at the new moon and be honest about the pace.</p><p>Write one thing to cut so the rest survives.</p></div>
+<div class="ritual" data-k="merc-begins"><div class="rhead"><span class="dt">Oct 7</span><h3>☿ Mercury Retrograde Begins in Scorpio</h3><span class="tm">10:37 AM ET</span></div><p>Mercury stations retrograde today.</p><p>Back up the thing you would be sick to lose. Then pick one project you abandoned and read it again with fresh eyes.</p><p>This is a good three weeks for revisiting and a poor three weeks for launching.</p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">Oct 15</span><h3>🌕 Full Moon in Aries</h3><span class="tm">9:46 AM ET</span></div><p>Light a candle. Write the thing you have been angry about and let it be as unfair as it actually felt.</p><p>Burn it safely, or tear it small and bin it.</p><p>Aries full moons want the heat out of your body and onto paper.</p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Oct 22</span><h3>🌗 Last Quarter Moon in Cancer</h3><span class="tm">1:28 PM ET</span></div><p>Light a candle and write the name of something you are ready to stop carrying for your family.</p><p>Pull one card: what is mine to put down?</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Oct 23</span><h3>✨ Scorpio Season Begins</h3><span class="tm">11:33 AM ET</span></div><p>Do something in the dark. One candle, no overhead light, no phone.</p><p>Scorpio season is for the things you only think about when nobody is watching.</p><p><em>One question to sit with this month:</em></p><p><strong>What am I ready to stop hiding from myself?</strong></p></div>
+<div class="ritual" data-k="merc-ends"><div class="rhead"><span class="dt">Oct 28</span><h3>☿ Mercury Retrograde Ends in Libra</h3><span class="tm">10:11 AM ET</span></div><p>Mercury stations direct today.</p><p>Send the message, publish the thing, sign the paper. Give it a couple of days to pick up speed and then go.</p><p>Write down what you saw clearly while it was backwards.</p></div>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Oct 29</span><h3>🌑 New Moon in Scorpio</h3><span class="tm">9:36 AM ET</span></div><p>Do this one in the dark, or close to it. One candle, no overhead light.</p><p>Write what you want that you have not told anyone. Scorpio begins in private and that is not a flaw in the method.</p><p>Pull one card: what am I ready to stop protecting?</p></div>
+<h2 class="mh">November 2027</h2>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Nov 6</span><h3>🌓 First Quarter Moon in Aquarius</h3><span class="tm">3:59 AM ET</span></div><p>Write down whose opinion has been slowing you down.</p><p>Pull one card: what happens if I stop waiting for that person to approve of this?</p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">Nov 13</span><h3>🌕 Full Moon in Taurus</h3><span class="tm">10:25 PM ET</span></div><p>Eat something slowly, alone, with no screen.</p><p>Write what you have that you were still working towards a year ago.</p><p>Pull one card: what am I holding on to that has stopped being comfort?</p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Nov 20</span><h3>🌗 Last Quarter Moon in Leo</h3><span class="tm">7:47 PM ET</span></div><p>Write the compliment you have been waiting to be given.</p><p>Give it to yourself in writing, then give the same one to somebody else today.</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Nov 22</span><h3>✨ Sagittarius Season Begins</h3><span class="tm">8:16 AM ET</span></div><p>Plan something you have no idea how to afford yet. Write it down as if it is happening.</p><p>Sagittarius season is for the size of the life, not the logistics of it.</p><p><em>One question to sit with this month:</em></p><p><strong>What would I go after if I believed I would get it?</strong></p></div>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Nov 27</span><h3>🌑 New Moon in Sagittarius</h3><span class="tm">10:24 PM ET</span></div><p>Go outside, even for five minutes, even in the cold. Look at something far away.</p><p>Write what you want to learn or where you want to go this year.</p><p>Pull one card: what belief is this going to ask me to update?</p></div>
+<h2 class="mh">December 2027</h2>
+<div class="ritual" data-k="fq"><div class="rhead"><span class="dt">Dec 6</span><h3>🌓 First Quarter Moon in Pisces</h3><span class="tm">12:21 AM ET</span></div><p>You have probably drifted a little. That is what this phase is for finding out.</p><p>Sit with water nearby, write where you lost the thread, and pick it back up in one small way today.</p></div>
+<div class="ritual" data-k="full"><div class="rhead"><span class="dt">Dec 13</span><h3>🌕 Full Moon in Gemini</h3><span class="tm">11:08 AM ET</span></div><p>Write down every loose thread in your head. All of them. Do not sort them.</p><p>Circle the two that actually matter and cross out the rest.</p><p>Gemini full moons are loud. This is how you turn the volume down.</p></div>
+<div class="ritual" data-k="lq"><div class="rhead"><span class="dt">Dec 20</span><h3>🌗 Last Quarter Moon in Virgo</h3><span class="tm">4:10 AM ET</span></div><p>Throw out the list. Write a new one with three things on it.</p><p>Last quarter moons are for admitting what is not going to happen this cycle.</p></div>
+<div class="ritual" data-k="season"><div class="rhead"><span class="dt">Dec 21</span><h3>✨ Capricorn Season Begins</h3><span class="tm">9:42 PM ET</span></div><p>Look back at the whole year before you look forward.</p><p>Write three things you built. Not three things you meant to build.</p><p><em>One question to sit with this month:</em></p><p><strong>What am I willing to work at slowly?</strong></p></div>
+<div class="ritual" data-k="new"><div class="rhead"><span class="dt">Dec 27</span><h3>🌑 New Moon in Capricorn</h3><span class="tm">3:11 PM ET</span></div><p>Write the goal on a small piece of paper and fold it once. Put it in the soil of a houseplant, or under a stone outside where it will not get moved.</p><p>You are not asking for it. You are putting it somewhere it can take its time.</p></div>
+<footer style="margin-top:34px;font-size:12.5px;color:var(--muted)">Written by sign and phase, so the same library carries every future year. High Priestess Tarot School.</footer></div></body></html>

@@ -10,6 +10,8 @@ moon phase, Mercury retrograde and eclipse for 2027. **67 events.**
 | `index.html` | The events page. Pick a time zone and the dates and times move with you |
 | `calendar/2027-astrology-events-all-day.ics` | All-day markers, dated Eastern. The one most people want |
 | `calendar/2027-astrology-events-times.ics` | Exact times, stored in UT, so each calendar renders it in its own zone |
+| `rituals/index.html` | ⭐ The premium version. Every event with a ritual |
+| `calendar/2027-astrology-events-rituals.ics` | ⭐ The premium calendar, rituals in the event descriptions |
 
 ## Which calendar file to offer
 
@@ -21,6 +23,23 @@ far from Eastern will see a handful of dates a day out.
 day grid, so a 3am moon is easy to miss.
 
 Offer all-day as the main button and exact times as the alternative.
+
+## The premium version
+
+`rituals/` is the paid upgrade the planner landing page has been offering. Every
+one of the 67 events carries a ritual: under fifteen minutes, using only what is
+already in the house, one action rather than a list.
+
+**It is written by sign and phase, not by date.** Twelve rituals for each of the
+four moon phases, twelve season openings with a question to sit with, two eclipse
+treatments and two for Mercury. Sixty-four pieces covering sixty-seven events.
+**New Moon in Taurus reads the same in 2031, so every future year is a script run
+rather than a writing job.**
+
+The source library lives in `biz-brain` at `content/rituals/`.
+
+**Every new moon names the date its full moon completes it**, same sign, roughly
+six months on, where that lands inside the same year.
 
 ## Building a new year
 
