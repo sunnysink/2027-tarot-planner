@@ -3,650 +3,285 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your 2027 Astrology Events Calendar</title>
+<title>Your 2027 Tarot Planner</title>
 <style>
-  :root{
-    --ink:#27222c; --muted:#6f6374; --paper:#fff7fb; --paper-deep:#eef9f8;
-    --panel:#fffdfd; --line:rgba(139,115,148,0.2);
-    --rose:#f4c5d5; --rose-deep:#d889a5;
-    --teal:#248c90; --teal-soft:#d9f3f0;
-    --violet:#8560a7; --violet-soft:#efe6f8;
-    --gold:#c69b4b; --gold-soft:#f4e3bf;
-    --green:#698c72;
-    --glass:rgba(255,255,255,0.55); --glass-strong:rgba(255,255,255,0.72);
-    --glass-line:rgba(255,255,255,0.62);
-    --shadow:0 18px 52px rgba(74,44,84,0.14); --radius:8px;
-    --sans:"Segoe UI",Arial,sans-serif; --serif:Georgia,"Times New Roman",serif;
-    --mono:"Cascadia Mono","Courier New",monospace;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:var(--sans); font-size:15px; line-height:1.5; color:var(--ink);
-    background:
-      linear-gradient(135deg, rgba(244,197,213,0.62) 0%, rgba(255,255,255,0) 34%),
-      linear-gradient(220deg, rgba(157,225,219,0.55) 0%, rgba(255,255,255,0) 38%),
-      linear-gradient(180deg,#fff8fc 0%,#f5fbfb 46%,#f8f0fb 100%);
-    background-attachment:fixed; min-height:100vh; padding:32px 18px 64px;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:940px;margin:0 auto}
-  h1,h2,h3{line-height:1.08;letter-spacing:0}
-  h1{font-family:var(--serif);font-size:clamp(30px,5.2vw,46px);font-weight:400}
-  .lede{color:var(--muted);margin-top:10px;max-width:none}
-  .kicker{color:var(--teal);font-size:12px;text-transform:uppercase;font-weight:850;letter-spacing:0}
+:root{
+  --ink:#27222c; --muted:#6f6374; --line:rgba(139,115,148,0.2);
+  --rose:#f4c5d5; --rose-deep:#d889a5; --teal:#248c90; --teal-soft:#d9f3f0;
+  --violet:#8560a7; --violet-soft:#efe6f8; --gold:#c69b4b; --gold-soft:#f4e3bf;
+  --green:#698c72;
+  --glass:rgba(255,255,255,0.55); --glass-line:rgba(255,255,255,0.62); --radius:8px;
+  --sans:"Segoe UI",Arial,sans-serif; --serif:Georgia,"Times New Roman",serif;
+  --mono:"Cascadia Mono","Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);font-size:15px;line-height:1.5;color:var(--ink);
+  background:
+    linear-gradient(135deg, rgba(244,197,213,0.62) 0%, rgba(255,255,255,0) 34%),
+    linear-gradient(220deg, rgba(157,225,219,0.55) 0%, rgba(255,255,255,0) 38%),
+    linear-gradient(180deg,#fff8fc 0%,#f5fbfb 46%,#f8f0fb 100%);
+  background-attachment:fixed;min-height:100vh;padding:34px 18px 64px}
+.wrap{max-width:880px;margin:0 auto}
+h1,h2,h3{line-height:1.08;letter-spacing:0}
+h1{font-family:var(--serif);font-size:clamp(31px,5.4vw,48px);font-weight:400}
+h2{font-family:var(--serif);font-size:27px;font-weight:400}
+.kicker{color:var(--teal);font-size:12px;text-transform:uppercase;font-weight:850;margin-bottom:9px}
+.lede{color:var(--muted);margin-top:12px;font-size:16.5px}
+.lede b{color:var(--ink)}
+.band{border:1px solid var(--glass-line);border-radius:var(--radius);background:var(--glass);
+  backdrop-filter:blur(18px);box-shadow:0 12px 34px rgba(74,44,84,0.1);padding:26px 28px}
+.sec{margin-top:36px}
+.sub{color:var(--muted);font-size:14.5px;margin-top:9px;line-height:1.6}
+.sub b{color:var(--ink)}
 
-  .surface,.band{border:1px solid var(--glass-line);border-radius:var(--radius);
-    background:var(--glass);backdrop-filter:blur(18px);box-shadow:0 12px 34px rgba(74,44,84,0.1)}
-  .band{padding:18px 20px;margin-top:18px}
-  .mini-card{border:1px solid var(--glass-line);border-radius:var(--radius);
-    background:rgba(255,255,255,0.54);backdrop-filter:blur(14px);
-    box-shadow:0 10px 24px rgba(74,44,84,0.08);padding:14px 16px}
-  .stack{display:grid;gap:12px}
-  .section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+/* ---- hero with cover ---- */
+.hero{display:grid;grid-template-columns:minmax(0,190px) 1fr;gap:26px;align-items:center}
+@media(max-width:620px){.hero{grid-template-columns:1fr;gap:18px}.cover{max-width:210px;margin:0 auto}}
+.cover{width:100%;aspect-ratio:3/4;border-radius:6px;overflow:hidden;
+  box-shadow:0 16px 40px rgba(74,44,84,0.28);border:1px solid rgba(139,115,148,0.25);
+  background:linear-gradient(150deg,#2b2a33,#16151c);display:grid;place-items:center}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover .ph{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,0.5);
+  text-align:center;padding:12px;text-transform:uppercase;line-height:1.7}
 
-  .badge{display:inline-flex;align-items:center;border-radius:999px;min-height:28px;
-    padding:0 12px;font-size:12px;font-weight:800;background:rgba(255,255,255,0.54);
-    border:1px solid rgba(139,115,148,0.22)}
-  .btn{border-radius:var(--radius);min-height:36px;font-size:13px;font-weight:800;
-    border:1px solid rgba(139,115,148,0.22);background:rgba(255,255,255,0.58);
-    color:var(--ink);padding:0 15px;cursor:pointer;
-    transition:transform 140ms ease,border-color 140ms ease,background 140ms ease,box-shadow 140ms ease}
-  .btn:hover{transform:translateY(-1px);border-color:var(--teal);box-shadow:0 8px 18px rgba(74,44,84,0.12)}
-  .btn.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+/* ---- buttons ---- */
+.cta{display:flex;align-items:center;gap:14px;width:100%;text-decoration:none;
+  border-radius:var(--radius);padding:15px 20px;margin-top:12px;
+  border:1px solid rgba(139,115,148,0.22);background:rgba(255,255,255,0.62);color:var(--ink);
+  transition:transform 140ms ease,border-color 140ms ease,background 140ms ease,box-shadow 140ms ease}
+.cta:hover{transform:translateY(-2px);border-color:var(--teal);
+  box-shadow:0 12px 26px rgba(74,44,84,0.14);background:rgba(255,255,255,0.82)}
+.cta .ic{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-size:18px;background:var(--teal-soft);border:1px solid rgba(36,140,144,0.3)}
+.cta .tx{flex:1}
+.cta .tt{font-size:16px;font-weight:800;display:block}
+.cta .ts{font-size:13px;color:var(--muted);display:block;margin-top:2px;font-weight:400}
+.cta .ar{font-size:19px;color:var(--teal);font-weight:800}
+.cta.primary{background:linear-gradient(135deg,var(--teal),#1d7276);border-color:#1d7276;color:#fff}
+.cta.primary .ts{color:rgba(255,255,255,0.85)}
+.cta.primary .ic{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.35)}
+.cta.primary .ar{color:#fff}
+.cta.primary:hover{border-color:#14595c;box-shadow:0 14px 30px rgba(36,140,144,0.34)}
+.cta.gold{background:linear-gradient(135deg,#d8ad5f,#b8873c);border-color:#a8782f;color:#2a2013}
+.cta.gold .ts{color:rgba(42,32,19,0.78)}
+.cta.gold .ic{background:rgba(255,255,255,0.32);border-color:rgba(255,255,255,0.5)}
+.cta.gold .ar{color:#2a2013}
+.cta.gold:hover{border-color:#8c6323;box-shadow:0 14px 30px rgba(184,135,60,0.4)}
+.cta.violet{background:linear-gradient(135deg,#9670b8,#6f4a92);border-color:#6f4a92;color:#fff}
+.cta.violet .ts{color:rgba(255,255,255,0.86)}
+.cta.violet .ic{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.36)}
+.cta.violet .ar{color:#fff}
+.cta.violet:hover{border-color:#573a74;box-shadow:0 14px 32px rgba(133,96,167,0.42)}
 
-  /* controls */
-  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
-  .field{display:grid;gap:6px;flex:1 1 300px}
-  label{font-size:12px;font-weight:850;color:var(--teal);text-transform:uppercase}
-  select{font-family:var(--sans);font-size:15px;font-weight:800;color:var(--ink);
-    padding:10px 12px;border-radius:var(--radius);border:1px solid rgba(139,115,148,0.22);
-    background:rgba(255,255,255,0.72);width:100%;cursor:pointer}
-  select:focus{outline:none;border-color:var(--teal)}
-  .zonenote{font-size:13px;color:var(--muted);margin-top:10px}
-  .zonenote b{color:var(--ink)}
+/* ---- workshop ---- */
+.workshop{background:linear-gradient(150deg,rgba(217,243,240,0.85),rgba(255,255,255,0.6));
+  border:1px solid rgba(36,140,144,0.42);border-radius:var(--radius);padding:26px 28px;
+  box-shadow:0 14px 38px rgba(74,44,84,0.1)}
 
-  .filters{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+/* ---- upgrade ---- */
+.upgrade{background:linear-gradient(150deg,rgba(244,227,191,0.72),rgba(255,255,255,0.6));
+  border:1px solid rgba(198,155,75,0.5);border-radius:var(--radius);padding:26px 28px;
+  box-shadow:0 14px 38px rgba(74,44,84,0.12)}
+.pricerow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:14px 0 4px}
+.price{font-family:var(--serif);font-size:44px;color:#8c6323;line-height:1}
+.per{font-size:13px;color:var(--muted);font-weight:700}
+.badge{display:inline-flex;align-items:center;border-radius:999px;min-height:28px;padding:0 13px;
+  font-size:12px;font-weight:800;background:rgba(255,255,255,0.62);
+  border:1px solid rgba(198,155,75,0.5);color:#8c6323}
+.badge.t{border-color:rgba(36,140,144,0.45);color:#1d7276}
+.list{list-style:none;margin-top:14px;display:grid;gap:9px}
+.list li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.5}
+.list .tick{color:var(--green);font-weight:800;flex:none}
+.sample{background:rgba(255,255,255,0.72);border:1px solid rgba(139,115,148,0.2);
+  border-radius:var(--radius);padding:15px 17px;margin-top:16px}
+.sample .st{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);font-weight:800;margin-bottom:7px}
+.sample p{font-size:14.5px;line-height:1.55}
+.sample p + p{margin-top:7px}
 
-  /* month + rows */
-  .month{margin-top:22px}
-  .month h2{font-family:var(--serif);font-size:23px;font-weight:400;margin-bottom:2px}
-  .month .mcount{font-size:12px;color:var(--muted);font-weight:800}
-  .rows{margin-top:10px;display:grid;gap:7px}
-  .ev{display:grid;grid-template-columns:78px 96px 1fr;gap:14px;align-items:center;
-    border:1px solid var(--glass-line);border-radius:var(--radius);
-    background:rgba(255,255,255,0.54);backdrop-filter:blur(14px);
-    box-shadow:0 10px 24px rgba(74,44,84,0.08);padding:11px 15px;border-left-width:4px}
-  .ev .d{font-weight:850;font-size:15px}
-  .ev .t{font-family:var(--mono);font-size:13px;color:var(--muted)}
-  .ev .n{font-weight:800}
-  .ev .sub{display:block;font-weight:400;font-size:12.5px;color:var(--teal);margin-top:3px}
-  .ev[data-k="new"]{border-left-color:var(--violet);background:linear-gradient(90deg,var(--violet-soft),rgba(255,255,255,0.54) 42%)}
-  .ev[data-k="full"]{border-left-color:var(--gold);background:linear-gradient(90deg,var(--gold-soft),rgba(255,255,255,0.54) 42%)}
-  .ev[data-k="eclipse"]{border-left-color:var(--rose-deep);background:linear-gradient(90deg,var(--rose),rgba(255,255,255,0.54) 42%)}
-  .ev[data-k="season"]{border-left-color:var(--green);background:linear-gradient(90deg,rgba(105,140,114,0.18),rgba(255,255,255,0.54) 42%)}
-  .ev[data-k="fq"]{border-left-color:var(--rose-deep);background:linear-gradient(90deg,rgba(244,197,213,0.45),rgba(255,255,255,0.54) 42%)}
-  .ev[data-k="lq"]{border-left-color:var(--teal);background:linear-gradient(90deg,var(--teal-soft),rgba(255,255,255,0.54) 42%)}
-  .ev[data-k^="merc"]{border-left-color:var(--violet);background:linear-gradient(90deg,rgba(133,96,167,0.14),rgba(255,255,255,0.54) 42%)}
-  .ev.star{box-shadow:0 12px 30px rgba(198,155,75,0.28);border-color:var(--gold)}
-  @media(max-width:600px){
-    .ev{grid-template-columns:1fr;gap:3px}
-    .ev .t{font-size:12px}
-  }
+/* ---- amazon row ---- */
+.amazon{display:grid;grid-template-columns:minmax(0,150px) 1fr;gap:24px;align-items:center;
+  background:rgba(255,255,255,0.55);border:1px solid var(--glass-line);border-radius:var(--radius);
+  padding:22px 24px;box-shadow:0 12px 30px rgba(74,44,84,0.09)}
+@media(max-width:620px){.amazon{grid-template-columns:1fr}.amazon .cover{max-width:180px;margin:0 auto}}
 
-  .key{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  .kchip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;
-    background:rgba(255,255,255,0.54);border:1px solid rgba(139,115,148,0.22);
-    border-radius:999px;min-height:28px;padding:0 12px}
-  .sw{width:11px;height:11px;border-radius:3px;flex:none}
+/* ---- the school ---- */
+.school{margin-top:40px;background:linear-gradient(150deg,rgba(239,230,248,0.9),rgba(244,197,213,0.42));
+  border:1px solid rgba(133,96,167,0.45);border-radius:var(--radius);padding:30px 30px 32px;
+  box-shadow:0 18px 46px rgba(74,44,84,0.16);text-align:center}
+.school h2{font-size:30px}
+.school .sub{max-width:none;font-size:15.5px}
+.school .cta{max-width:440px;margin-left:auto;margin-right:auto;margin-top:18px}
 
-  footer{margin-top:34px;font-size:12.5px;color:var(--muted);line-height:1.6}
-  footer b{color:var(--ink)}
+.note{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.6;
+  background:rgba(255,255,255,0.5);border:1px dashed rgba(139,115,148,0.34);
+  border-radius:var(--radius);padding:14px 16px}
+.note b{color:var(--ink)}
+footer{margin-top:30px;text-align:center;font-size:12.5px;color:var(--muted);line-height:1.7}
 </style>
 </head>
 <body>
+
+<!-- ==========================================================
+     FOUR LINKS TO PASTE. Search for PASTE_ and swap the URL.
+       PASTE_DIGITAL    the digital PDF planner download
+       PASTE_WORKSHOP   the workshop registration form
+       PASTE_CHECKOUT   the ClickFunnels checkout, ritual calendar
+       PASTE_AMAZON     the KDP listing for the paperback
+     TWO IMAGES to drop into the repo at these paths:
+       images/cover-digital.png   the dark moth cover
+       images/cover-print.png     the light moth cover
+     ========================================================== -->
 <div class="wrap">
 
-  <div class="band" style="margin-top:0;padding:26px 26px">
-    <div class="kicker">High Priestess Tarot School</div>
-    <h1>Your 2027 Astrology Events Calendar</h1>
-    <p class="lede">Every season, moon phase, Mercury retrograde and eclipse for 2027. <b>Pick your time zone and the dates and times move with you.</b></p>
-  </div>
-
   <div class="band">
-    <div class="controls">
-      <div class="field">
-        <label for="tz">Your time zone</label>
-        <select id="tz"></select>
+    <div class="hero">
+      <div class="cover"><img src="images/cover-digital.png" alt="2027 Tarot Planner" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'cover goes here / images/cover-digital.png'}))"></div>
+      <div>
+        <div class="kicker">High Priestess Tarot School</div>
+        <h1>Your 2027 Tarot Planner</h1>
+        <p class="lede">Everything that came with your planner lives on this page. <b>Start by
+        downloading it, then put the whole cosmic year in your calendar.</b></p>
+        <a class="cta primary" href="PASTE_DIGITAL">
+          <span class="ic">⬇</span>
+          <span class="tx"><span class="tt">Download your digital planner</span>
+          <span class="ts">The full 2027 PDF, yours to keep and print</span></span>
+          <span class="ar">&rsaquo;</span>
+        </a>
       </div>
-      <button class="btn" id="useMine">Use my time zone</button>
-      <button class="btn" id="copy">Copy the whole year</button>
     </div>
-    <div class="zonenote" id="zonenote"></div>
-    <div class="filters" id="filters"></div>
   </div>
 
-  <div id="list"></div>
-
-  <div class="band">
-    <div class="kicker">Colour key</div>
-    <div class="key" id="key"></div>
+  <div class="sec">
+    <h2>Subscribe to the 2027 calendar</h2>
+    <p class="sub">Every new moon, full moon, quarter moon, season start, eclipse and Mercury
+    retrograde of 2027, sitting along the top of the day in your own calendar. <b>You see them
+    without going looking.</b></p>
+    <p class="sub"><b>Subscribing beats downloading.</b> It stays connected, so if anything is
+    ever corrected or added it turns up on its own. You never have to do this again.</p>
+    <a class="cta primary" href="https://calendar.google.com/calendar/render?cid=webcal%3A%2F%2Fsunnysink.github.io%2F2027-tarot-planner%2Fcalendar%2F2027-astrology-events-all-day.ics">
+      <span class="ic">📅</span>
+      <span class="tx"><span class="tt">Subscribe in Google Calendar</span>
+      <span class="ts">67 events, all day markers, Eastern time</span></span>
+      <span class="ar">&rsaquo;</span>
+    </a>
+    <a class="cta" href="webcal://sunnysink.github.io/2027-tarot-planner/calendar/2027-astrology-events-all-day.ics">
+      <span class="ic">🍎</span>
+      <span class="tx"><span class="tt">Apple Calendar, Outlook, or anything else</span>
+      <span class="ts">Same calendar, subscribed the standard way</span></span>
+      <span class="ar">&rsaquo;</span>
+    </a>
+    <a class="cta" href="https://calendar.google.com/calendar/render?cid=webcal%3A%2F%2Fsunnysink.github.io%2F2027-tarot-planner%2Fcalendar%2F2027-astrology-events-times.ics">
+      <span class="ic">🕰️</span>
+      <span class="tx"><span class="tt">Prefer exact times?</span>
+      <span class="ts">Converts to your own time zone. Best if you are outside North America</span></span>
+      <span class="ar">&rsaquo;</span>
+    </a>
   </div>
 
-  <footer>
-    <b>All source times are UT/GMT and converted in your browser</b>, so daylight saving is handled for whichever zone you pick.
-    <br><b>Mercury retrograde stations are included with their exact times</b> and convert like everything else.
-    <br>Moon phases, eclipses and season starts from Astro-Seek.<br>Made for you by <a href="https://highpriestessts.com/hpts-option" target="_blank" rel="noopener">High Priestess Tarot School</a>.
-  </footer>
+  <div class="sec">
+    <h2>Look up any date</h2>
+    <p class="sub">Every 2027 event in one list, with a time zone picker that moves the dates
+    and the times together. <b>No converter, no mental arithmetic.</b></p>
+    <a class="cta" href="https://sunnysink.github.io/2027-tarot-planner/events/">
+      <span class="ic">🔮</span>
+      <span class="tx"><span class="tt">Open the 2027 events list</span>
+      <span class="ts">Pick your time zone and everything adjusts</span></span>
+      <span class="ar">&rsaquo;</span>
+    </a>
+    <a class="cta" href="https://sunnysink.github.io/2027-tarot-planner/moon-calendar/">
+      <span class="ic">🌕</span>
+      <span class="tx"><span class="tt">See the twelve month moon calendar</span>
+      <span class="ts">Print it and it becomes your wall calendar, two months to a page</span></span>
+      <span class="ar">&rsaquo;</span>
+    </a>
+  </div>
+
+  <div class="sec">
+    <h2>Add the rituals</h2>
+    <div class="upgrade" style="margin-top:14px">
+      <span class="badge">The upgrade</span>
+      <div class="pricerow"><span class="price">$9</span><span class="per">one time, yours for good</span></div>
+      <p class="sub" style="margin-top:10px">The same 2027 calendar, with <b>a ritual on every
+      single event.</b> It arrives in your calendar so the ritual is already there on the day,
+      instead of somewhere you meant to look.</p>
+      <ul class="list">
+        <li><span class="tick">✓</span><span><b>67 rituals</b>, one for every moon, season, eclipse and retrograde</span></li>
+        <li><span class="tick">✓</span><span><b>Under fifteen minutes each</b>, using only what is already in your house</span></li>
+        <li><span class="tick">✓</span><span>Candle work, journal prompts and single card pulls, matched to the phase and the sign</span></li>
+        <li><span class="tick">✓</span><span><b>Every new moon tells you the date its full moon completes it</b>, so you know when to come back</span></li>
+        <li><span class="tick">✓</span><span>Drops straight into your calendar, and a page you can read or print</span></li>
+      </ul>
+      <div class="sample">
+        <div class="st">A ritual, in full</div>
+        <p><b>🌕 Full Moon in Leo, January 22</b></p>
+        <p>Light a candle and put it where you can see your own face.</p>
+        <p>Say out loud the one thing you have done this year that you are proud of. All the way
+        through, no qualifier on the end.</p>
+        <p>Leo full moons are for being witnessed. If nobody is home, you count.</p>
+      </div>
+      <a class="cta gold" href="PASTE_CHECKOUT">
+        <span class="ic">🌙</span>
+        <span class="tx"><span class="tt">Get the Ritual Calendar, $9</span>
+        <span class="ts">One payment. In your calendar in about a minute</span></span>
+        <span class="ar">&rsaquo;</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Hold it in your hands</h2>
+    <div class="amazon" style="margin-top:14px">
+      <div class="cover"><img src="images/cover-print.png" alt="2027 Tarot Planner paperback" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'print cover / images/cover-print.png'}))"></div>
+      <div>
+        <p class="sub" style="margin-top:0">The printed 2027 Tarot Planner. <b>A full year of
+        planning pages, spreads and moon work, in something you can write in.</b></p>
+        <a class="cta" href="PASTE_AMAZON">
+          <span class="ic">📖</span>
+          <span class="tx"><span class="tt">Get the printed planner</span>
+          <span class="ts">Paperback on Amazon</span></span>
+          <span class="ar">&rsaquo;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="workshop" style="margin-top:16px">
+      <span class="badge t">Included with any planner purchase</span>
+      <h2 style="margin-top:13px">Your 2027 planning workshop</h2>
+      <p class="sub">A full walkthrough of how to actually use this planner across the year.
+      How to work the moon phases, how to plan a season, and how to keep it going in March when
+      the newness has worn off. <b>Recorded, so you can watch it whenever you like.</b></p>
+      <p class="sub"><b>Bought the digital or the paperback? It is yours.</b> Register with the
+      email you used to buy and it comes straight to you.</p>
+      <a class="cta" href="PASTE_WORKSHOP">
+        <span class="ic">🎥</span>
+        <span class="tx"><span class="tt">Register for the workshop</span>
+        <span class="ts">For planner buyers. Register with your purchase email</span></span>
+        <span class="ar">&rsaquo;</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="school">
+    <div class="kicker" style="color:var(--violet)">Where this all comes from</div>
+    <h2>Learn to actually read the cards</h2>
+    <p class="sub">The planner gives you the year. <b>High Priestess Tarot School gives you the
+    skill.</b> A 33 lesson core course, five bonus trainings, the Tarot Reflections Journal, and
+    Q&amp;A calls every other week with readers working on exactly what you are working on.</p>
+    <a class="cta violet" href="https://highpriestessts.com/hpts-option">
+      <span class="ic">🔑</span>
+      <span class="tx"><span class="tt">Join the school, $7 a month</span>
+      <span class="ts">Cancel anytime. High Priestess Tarot School</span></span>
+      <span class="ar">&rsaquo;</span>
+    </a>
+  </div>
+
+  <div class="note"><b>All times are Eastern unless you pick a different zone.</b> The events list
+  converts everything for you, and the exact times calendar converts on its own.<br><br>
+  <b>A subscribed calendar refreshes on your calendar app's own schedule</b>, so a change can take
+  a day to show up. Nothing to do at your end.</div>
+
+  <footer>&copy; Sunny Sink. High Priestess Tarot School.</footer>
 </div>
-<script>
-const EVENTS = [
-{
-"t":"2027-01-07T20:24:00Z",
-"k":"new",
-"l":"New Moon in Capricorn"
-},
-{
-"t":"2027-01-15T20:34:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Aries"
-},
-{
-"t":"2027-01-20T07:30:00Z",
-"k":"season",
-"l":"Aquarius Season Begins"
-},
-{
-"t":"2027-01-22T12:17:00Z",
-"k":"full",
-"l":"Full Moon in Leo"
-},
-{
-"t":"2027-01-29T10:55:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Scorpio"
-},
-{
-"t":"2027-02-06T16:00:00Z",
-"k":"eclipse",
-"l":"Solar Eclipse in Aquarius"
-},
-{
-"t":"2027-02-09T17:36:00Z",
-"k":"merc-begins",
-"l":"Mercury Retrograde Begins in Pisces"
-},
-{
-"t":"2027-02-14T07:58:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Taurus"
-},
-{
-"t":"2027-02-18T21:34:00Z",
-"k":"season",
-"l":"Pisces Season Begins"
-},
-{
-"t":"2027-02-20T23:14:00Z",
-"k":"eclipse",
-"l":"Lunar Eclipse in Virgo"
-},
-{
-"t":"2027-02-28T05:16:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Sagittarius"
-},
-{
-"t":"2027-03-03T12:32:00Z",
-"k":"merc-ends",
-"l":"Mercury Retrograde Ends in Aquarius"
-},
-{
-"t":"2027-03-08T09:29:00Z",
-"k":"new",
-"l":"New Moon in Pisces"
-},
-{
-"t":"2027-03-15T16:24:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Gemini"
-},
-{
-"t":"2027-03-20T20:25:00Z",
-"k":"season",
-"l":"Aries Season Begins"
-},
-{
-"t":"2027-03-22T10:43:00Z",
-"k":"full",
-"l":"Full Moon in Libra"
-},
-{
-"t":"2027-03-30T00:53:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Capricorn"
-},
-{
-"t":"2027-04-06T23:50:00Z",
-"k":"new",
-"l":"New Moon in Aries"
-},
-{
-"t":"2027-04-13T22:56:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Cancer"
-},
-{
-"t":"2027-04-20T07:18:00Z",
-"k":"season",
-"l":"Taurus Season Begins"
-},
-{
-"t":"2027-04-20T22:26:00Z",
-"k":"full",
-"l":"Full Moon in Scorpio"
-},
-{
-"t":"2027-04-28T20:17:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Aquarius"
-},
-{
-"t":"2027-05-06T10:58:00Z",
-"k":"new",
-"l":"New Moon in Taurus"
-},
-{
-"t":"2027-05-13T04:43:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Leo"
-},
-{
-"t":"2027-05-20T10:58:00Z",
-"k":"full",
-"l":"Full Moon in Scorpio",
-"note":"The second full moon in Scorpio this year. April's sat at 0 degrees, this one at 29."
-},
-{
-"t":"2027-05-21T06:18:00Z",
-"k":"season",
-"l":"Gemini Season Begins"
-},
-{
-"t":"2027-05-28T13:57:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Pisces"
-},
-{
-"t":"2027-06-04T19:40:00Z",
-"k":"new",
-"l":"New Moon in Gemini"
-},
-{
-"t":"2027-06-10T18:15:00Z",
-"k":"merc-begins",
-"l":"Mercury Retrograde Begins in Cancer"
-},
-{
-"t":"2027-06-11T10:55:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Virgo"
-},
-{
-"t":"2027-06-19T00:44:00Z",
-"k":"full",
-"l":"Full Moon in Sagittarius"
-},
-{
-"t":"2027-06-21T14:11:00Z",
-"k":"season",
-"l":"Cancer Season Begins"
-},
-{
-"t":"2027-06-27T04:54:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Aries"
-},
-{
-"t":"2027-07-04T03:01:00Z",
-"k":"new",
-"l":"New Moon in Cancer"
-},
-{
-"t":"2027-07-04T19:39:00Z",
-"k":"merc-ends",
-"l":"Mercury Retrograde Ends in Gemini"
-},
-{
-"t":"2027-07-10T18:38:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Libra"
-},
-{
-"t":"2027-07-18T16:04:00Z",
-"k":"eclipse",
-"l":"Lunar Eclipse in Capricorn"
-},
-{
-"t":"2027-07-23T01:05:00Z",
-"k":"season",
-"l":"Leo Season Begins"
-},
-{
-"t":"2027-07-26T16:54:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Taurus"
-},
-{
-"t":"2027-08-02T10:07:00Z",
-"k":"eclipse",
-"l":"Solar Eclipse in Leo",
-"note":"Total solar eclipse, one of the longest of the century."
-},
-{
-"t":"2027-08-09T04:53:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Scorpio"
-},
-{
-"t":"2027-08-17T07:14:00Z",
-"k":"eclipse",
-"l":"Lunar Eclipse in Aquarius"
-},
-{
-"t":"2027-08-23T08:15:00Z",
-"k":"season",
-"l":"Virgo Season Begins"
-},
-{
-"t":"2027-08-25T02:27:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Gemini"
-},
-{
-"t":"2027-08-31T17:40:00Z",
-"k":"new",
-"l":"New Moon in Virgo"
-},
-{
-"t":"2027-09-07T18:30:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Sagittarius"
-},
-{
-"t":"2027-09-15T23:03:00Z",
-"k":"full",
-"l":"Full Moon in Pisces"
-},
-{
-"t":"2027-09-23T06:02:00Z",
-"k":"season",
-"l":"Libra Season Begins"
-},
-{
-"t":"2027-09-23T10:20:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Cancer"
-},
-{
-"t":"2027-09-30T02:35:00Z",
-"k":"new",
-"l":"New Moon in Libra"
-},
-{
-"t":"2027-10-07T11:47:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Capricorn"
-},
-{
-"t":"2027-10-07T14:37:00Z",
-"k":"merc-begins",
-"l":"Mercury Retrograde Begins in Scorpio"
-},
-{
-"t":"2027-10-15T13:46:00Z",
-"k":"full",
-"l":"Full Moon in Aries"
-},
-{
-"t":"2027-10-22T17:28:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Cancer"
-},
-{
-"t":"2027-10-23T15:33:00Z",
-"k":"season",
-"l":"Scorpio Season Begins"
-},
-{
-"t":"2027-10-28T14:11:00Z",
-"k":"merc-ends",
-"l":"Mercury Retrograde Ends in Libra"
-},
-{
-"t":"2027-10-29T13:36:00Z",
-"k":"new",
-"l":"New Moon in Scorpio"
-},
-{
-"t":"2027-11-06T07:59:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Aquarius"
-},
-{
-"t":"2027-11-14T03:25:00Z",
-"k":"full",
-"l":"Full Moon in Taurus"
-},
-{
-"t":"2027-11-21T00:47:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Leo"
-},
-{
-"t":"2027-11-22T13:16:00Z",
-"k":"season",
-"l":"Sagittarius Season Begins"
-},
-{
-"t":"2027-11-28T03:24:00Z",
-"k":"new",
-"l":"New Moon in Sagittarius"
-},
-{
-"t":"2027-12-06T05:21:00Z",
-"k":"fq",
-"l":"First Quarter Moon in Pisces"
-},
-{
-"t":"2027-12-13T16:08:00Z",
-"k":"full",
-"l":"Full Moon in Gemini"
-},
-{
-"t":"2027-12-20T09:10:00Z",
-"k":"lq",
-"l":"Last Quarter Moon in Virgo"
-},
-{
-"t":"2027-12-22T02:42:00Z",
-"k":"season",
-"l":"Capricorn Season Begins"
-},
-{
-"t":"2027-12-27T20:11:00Z",
-"k":"new",
-"l":"New Moon in Capricorn"
-}
-];
-
-const KINDS = [
-  ["season","Season beginnings","#698c72"],
-  ["new","New Moons","#8560a7"],
-  ["full","Full Moons","#c69b4b"],
-  ["fq","First Quarter Moons","#d889a5"],
-  ["lq","Last Quarter Moons","#248c90"],
-  ["eclipse","Eclipses","#d889a5"],
-  ["merc","Mercury Retrograde","#8560a7"],
-];
-
-/* ---- time zone list ---- */
-const COMMON = [
-  "America/Los_Angeles","America/Denver","America/Chicago","America/New_York",
-  "America/Toronto","America/Mexico_City","America/Sao_Paulo","Europe/London",
-  "Europe/Dublin","Europe/Paris","Europe/Berlin","Europe/Madrid","Europe/Rome",
-  "Europe/Athens","Europe/Moscow","Africa/Lagos","Africa/Johannesburg","Africa/Cairo",
-  "Asia/Dubai","Asia/Karachi","Asia/Kolkata","Asia/Bangkok","Asia/Singapore",
-  "Asia/Hong_Kong","Asia/Shanghai","Asia/Tokyo","Asia/Seoul",
-  "Australia/Perth","Australia/Adelaide","Australia/Brisbane","Australia/Sydney",
-  "Pacific/Auckland","UTC"
-];
-function allZones(){
-  try { const z = Intl.supportedValuesOf("timeZone"); if (z && z.length) return z; } catch(e){}
-  return COMMON;
-}
-const MINE = (()=>{ try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "America/New_York"; }
-                    catch(e){ return "America/New_York"; } })();
-
-const sel = document.getElementById("tz");
-function buildZones(){
-  const all = allZones();
-  const set = new Set(COMMON);
-  if (!set.has(MINE)) COMMON.unshift(MINE);
-  const mk = (v,label)=>{ const o=document.createElement("option"); o.value=v; o.textContent=label; return o; };
-  const g1 = document.createElement("optgroup"); g1.label = "Common";
-  COMMON.forEach(z => g1.appendChild(mk(z, pretty(z))));
-  sel.appendChild(g1);
-  if (all !== COMMON){
-    const g2 = document.createElement("optgroup"); g2.label = "All time zones";
-    all.forEach(z => g2.appendChild(mk(z, pretty(z))));
-    sel.appendChild(g2);
-  }
-  sel.value = MINE;
-  if (sel.value !== MINE) sel.value = "America/New_York";
-}
-function pretty(z){ return z.replace(/_/g," ").replace("/", " · "); }
-
-/* ---- formatting ---- */
-function parts(iso, tz){
-  const d = new Date(iso);
-  const f = new Intl.DateTimeFormat("en-US", {
-    timeZone: tz, month:"short", day:"numeric", year:"numeric",
-    hour:"numeric", minute:"2-digit", hour12:true
-  });
-  const o = {};
-  f.formatToParts(d).forEach(p => o[p.type] = p.value);
-  return o;
-}
-function abbr(tz){
-  try {
-    const p = new Intl.DateTimeFormat("en-US",{timeZone:tz,timeZoneName:"short"})
-      .formatToParts(new Date("2027-07-01T12:00:00Z")).find(x=>x.type==="timeZoneName");
-    return p ? p.value : "";
-  } catch(e){ return ""; }
-}
-
-let active = new Set(KINDS.map(k=>k[0]));
-
-function render(){
-  const tz = sel.value;
-  const months = new Map();
-  EVENTS.forEach(e => {
-    const base = e.k.startsWith("merc") ? "merc" : e.k;
-    if (!active.has(base)) return;
-    let key, day, time, sortT;
-    if (e.dateOnly){
-      const [y,m,dd] = e.t.split("-").map(Number);
-      const d = new Date(Date.UTC(y, m-1, dd, 12));
-      const p = new Intl.DateTimeFormat("en-US",{timeZone:"UTC",month:"long",day:"numeric"}).formatToParts(d);
-      const o={}; p.forEach(x=>o[x.type]=x.value);
-      key = o.month; day = o.month.slice(0,3)+" "+o.day; time = "date only"; sortT = e.t+"T12:00:00Z";
-    } else {
-      const o = parts(e.t, tz);
-      key = new Intl.DateTimeFormat("en-US",{timeZone:tz,month:"long"}).format(new Date(e.t));
-      day = o.month+" "+o.day; time = o.hour+":"+o.minute+" "+o.dayPeriod; sortT = e.t;
-    }
-    if (!months.has(key)) months.set(key, []);
-    months.get(key).push({e, day, time, sortT});
-  });
-
-  const order = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const list = document.getElementById("list");
-  list.innerHTML = "";
-  order.forEach(m => {
-    if (!months.has(m)) return;
-    const items = months.get(m).sort((a,b)=> a.sortT < b.sortT ? -1 : 1);
-    const wrap = document.createElement("div");
-    wrap.className = "month";
-    wrap.innerHTML = `<div class="section-head"><div><h2>${m} 2027</h2></div>
-      <span class="mcount">${items.length} event${items.length===1?"":"s"}</span></div>
-      <div class="rows"></div>`;
-    const rows = wrap.querySelector(".rows");
-    items.forEach(({e, day, time}) => {
-      const row = document.createElement("div");
-      row.className = "ev" + (e.note ? " star" : "");
-      row.setAttribute("data-k", e.k);
-      row.innerHTML = `<span class="d">${day}</span><span class="t">${time}</span>
-        <span class="n">${e.l}${e.note ? `<span class="sub">${e.note}</span>` : ""}</span>`;
-      rows.appendChild(row);
-    });
-    list.appendChild(wrap);
-  });
-
-  const a = abbr(tz);
-  document.getElementById("zonenote").innerHTML =
-    `Showing every time in <b>${pretty(tz)}</b>${a ? " ("+a+")" : ""}. `+
-    `Daylight saving is applied automatically. <b>Some events land on a different date</b> than they do in UT, which is the point of this.`;
-}
-
-/* ---- filters + key ---- */
-const filters = document.getElementById("filters");
-KINDS.forEach(([k,label]) => {
-  const b = document.createElement("button");
-  b.className = "btn on"; b.textContent = label;
-  b.addEventListener("click", () => {
-    if (active.has(k)) { active.delete(k); b.classList.remove("on"); }
-    else { active.add(k); b.classList.add("on"); }
-    render();
-  });
-  filters.appendChild(b);
-});
-const key = document.getElementById("key");
-KINDS.forEach(([k,label,colour]) => {
-  const s = document.createElement("span");
-  s.className = "kchip";
-  s.innerHTML = `<span class="sw" style="background:${colour}"></span>${label}`;
-  key.appendChild(s);
-});
-
-/* ---- buttons ---- */
-document.getElementById("useMine").addEventListener("click", () => {
-  sel.value = MINE; render();
-});
-document.getElementById("copy").addEventListener("click", (ev) => {
-  const tz = sel.value;
-  const lines = ["2027 Astrology Events", "All times in " + pretty(tz), ""];
-  EVENTS.forEach(e => {
-    const base = e.k.startsWith("merc") ? "merc" : e.k;
-    if (!active.has(base)) return;
-    if (e.dateOnly){
-      const [y,m,dd] = e.t.split("-").map(Number);
-      const d = new Date(Date.UTC(y,m-1,dd,12));
-      const s = new Intl.DateTimeFormat("en-US",{timeZone:"UTC",month:"short",day:"numeric"}).format(d);
-      lines.push(s + "\t(date only)\t" + e.l);
-    } else {
-      const o = parts(e.t, tz);
-      lines.push(o.month+" "+o.day+"\t"+o.hour+":"+o.minute+" "+o.dayPeriod+"\t"+e.l);
-    }
-  });
-  const txt = lines.join("\n");
-  const b = ev.currentTarget, orig = b.textContent;
-  navigator.clipboard.writeText(txt).then(()=>{ b.textContent="Copied"; setTimeout(()=>b.textContent=orig,1600); })
-    .catch(()=>{ b.textContent="Select the page and copy"; setTimeout(()=>b.textContent=orig,2400); });
-});
-
-sel.addEventListener("change", render);
-buildZones();
-render();
-</script>
 </body>
 </html>

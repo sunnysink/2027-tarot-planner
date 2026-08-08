@@ -7,7 +7,9 @@ moon phase, Mercury retrograde and eclipse for 2027. **67 events.**
 
 | Path | What it is |
 |---|---|
-| `index.html` | The events page. Pick a time zone and the dates and times move with you |
+| `index.html` | ⭐ **The hub.** Where planner buyers land. Every link lives here |
+| `events/index.html` | The events page. Pick a time zone and the dates and times move with you |
+| `images/` | The two cover images. See `images/README.md` |
 | `calendar/2027-astrology-events-all-day.ics` | All-day markers, dated Eastern. The one most people want |
 | `calendar/2027-astrology-events-times.ics` | Exact times, stored in UT, so each calendar renders it in its own zone |
 | `moon-calendar/index.html` | ⭐ Twelve month grids. Print it and you have the wall calendar |
@@ -24,6 +26,20 @@ far from Eastern will see a handful of dates a day out.
 day grid, so a 3am moon is easy to miss.
 
 Offer all-day as the main button and exact times as the alternative.
+
+## The hub
+
+`index.html` is the page the planner sends people to. Digital download, calendar
+subscription, the events list, the moon calendar, the ritual upgrade, the
+paperback, the workshop, and the school.
+
+**Four links need pasting in before it goes live.** They are marked `PASTE_` with
+a comment block at the top of the file naming each one: the digital PDF, the
+workshop registration, the ClickFunnels checkout, and the Amazon listing.
+
+**The calendars are offered as subscriptions rather than downloads**, so a later
+correction reaches everyone who already subscribed. Google gets its own add-by-URL
+link, everything else gets `webcal://`.
 
 ## The moon calendar
 
