@@ -4,8 +4,15 @@ Drop the two cover files here with **exactly these names**:
 
 | File | Which cover |
 |---|---|
-| `cover-digital.png` | The **dark** moth cover. Shown at the top of the hub page |
-| `cover-print.png` | The **light** moth cover. Shown beside the paperback link |
+| `cover-digital.jpg` | The **dark** moth. **This is what the page loads.** |
+| `cover-print.jpg` | The **light** moth. **This is what the page loads.** |
+| `cover-digital.png` | Full resolution source, 1545x2000. Not used by the page |
+| `cover-print.png` | Full resolution source, 1545x2000. Not used by the page |
+
+**Upload the full size PNG and regenerate the JPG from it.** PNG is lossless, which
+is the wrong format for an illustrated cover: 1545x2000 came out at 2.4 MB and 3.2 MB.
+The same images as progressive JPEG at 900px wide are about 20 times smaller and
+look identical at the size they display.
 
 **The extension can stay `.png` even if the file is really a JPG.** Browsers read the
 actual file, not the name.
