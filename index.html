@@ -89,6 +89,9 @@ h2{font-family:var(--serif);font-size:27px;font-weight:400}
   font-size:12px;font-weight:800;background:rgba(255,255,255,0.62);
   border:1px solid rgba(198,155,75,0.5);color:#8c6323}
 .badge.t{border-color:rgba(36,140,144,0.45);color:#1d7276}
+.badge.free{border-color:rgba(105,140,114,0.55);color:#4d6b56;background:rgba(105,140,114,0.14);
+  letter-spacing:.06em;text-transform:uppercase}
+.headrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .list{list-style:none;margin-top:14px;display:grid;gap:9px}
 .list li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.5}
 .list .tick{color:var(--green);font-weight:800;flex:none}
@@ -123,9 +126,8 @@ footer{margin-top:30px;text-align:center;font-size:12.5px;color:var(--muted);lin
 <body>
 
 <!-- ==========================================================
-     FOUR LINKS TO PASTE. Search for PASTE_ and swap the URL.
+     THREE LINKS TO PASTE. Search for PASTE_ and swap the URL.
        PASTE_DIGITAL    the digital PDF planner download
-       PASTE_WORKSHOP   the workshop registration form
        PASTE_CHECKOUT   the ClickFunnels checkout, ritual calendar
        PASTE_AMAZON     the KDP listing for the paperback
      TWO IMAGES to drop into the repo at these paths:
@@ -153,16 +155,19 @@ footer{margin-top:30px;text-align:center;font-size:12.5px;color:var(--muted);lin
   </div>
 
   <div class="sec">
-    <h2>Subscribe to the 2027 calendar</h2>
+    <div class="headrow"><h2>Subscribe to the 2027 calendar</h2>
+    <span class="badge free">Free</span></div>
     <p class="sub">Every new moon, full moon, quarter moon, season start, eclipse and Mercury
     retrograde of 2027, sitting along the top of the day in your own calendar. <b>You see them
     without going looking.</b></p>
+    <p class="sub"><b>These next two are free, and they are yours whether you ever buy
+    anything else or not.</b></p>
     <p class="sub"><b>Subscribing beats downloading.</b> It stays connected, so if anything is
     ever corrected or added it turns up on its own. You never have to do this again.</p>
     <a class="cta primary" href="https://calendar.google.com/calendar/render?cid=webcal%3A%2F%2Fsunnysink.github.io%2F2027-tarot-planner%2Fcalendar%2F2027-astrology-events-all-day.ics">
       <span class="ic">📅</span>
       <span class="tx"><span class="tt">Subscribe in Google Calendar</span>
-      <span class="ts">67 events, all day markers, Eastern time</span></span>
+      <span class="ts">Free. 67 events, all day markers, Eastern time</span></span>
       <span class="ar">&rsaquo;</span>
     </a>
     <a class="cta" href="webcal://sunnysink.github.io/2027-tarot-planner/calendar/2027-astrology-events-all-day.ics">
@@ -180,7 +185,8 @@ footer{margin-top:30px;text-align:center;font-size:12.5px;color:var(--muted);lin
   </div>
 
   <div class="sec">
-    <h2>Look up any date</h2>
+    <div class="headrow"><h2>Look up any date</h2>
+    <span class="badge free">Also free</span></div>
     <p class="sub">Every 2027 event in one list, with a time zone picker that moves the dates
     and the times together. <b>No converter, no mental arithmetic.</b></p>
     <a class="cta" href="https://sunnysink.github.io/2027-tarot-planner/events/">
@@ -251,12 +257,12 @@ footer{margin-top:30px;text-align:center;font-size:12.5px;color:var(--muted);lin
       <p class="sub">A full walkthrough of how to actually use this planner across the year.
       How to work the moon phases, how to plan a season, and how to keep it going in March when
       the newness has worn off. <b>Recorded, so you can watch it whenever you like.</b></p>
-      <p class="sub"><b>Bought the digital or the paperback? It is yours.</b> Register with the
-      email you used to buy and it comes straight to you.</p>
-      <a class="cta" href="PASTE_WORKSHOP">
+      <p class="sub"><b>Bought the digital or the paperback? It is yours.</b> Email us your
+      proof of purchase, an order number or a screenshot of the receipt, and we will add you.</p>
+      <a class="cta" href="mailto:support@sunnysink.com?subject=2027%20Planner%20Workshop&body=Hi%20Sunny%2C%0A%0AI%20would%20like%20the%202027%20planner%20workshop.%0A%0AMy%20proof%20of%20purchase%3A%0A%28order%20number%20or%20a%20screenshot%20of%20the%20receipt%29%0A%0AThank%20you%21">
         <span class="ic">🎥</span>
-        <span class="tx"><span class="tt">Register for the workshop</span>
-        <span class="ts">For planner buyers. Register with your purchase email</span></span>
+        <span class="tx"><span class="tt">Email us for the workshop</span>
+        <span class="ts">support@sunnysink.com. Send your proof of purchase and we will send it over</span></span>
         <span class="ar">&rsaquo;</span>
       </a>
     </div>

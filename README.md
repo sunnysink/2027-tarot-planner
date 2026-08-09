@@ -33,9 +33,16 @@ Offer all-day as the main button and exact times as the alternative.
 subscription, the events list, the moon calendar, the ritual upgrade, the
 paperback, the workshop, and the school.
 
-**Four links need pasting in before it goes live.** They are marked `PASTE_` with
+**Three links need pasting in before it goes live.** They are marked `PASTE_` with
 a comment block at the top of the file naming each one: the digital PDF, the
-workshop registration, the ClickFunnels checkout, and the Amazon listing.
+ClickFunnels checkout, and the Amazon listing.
+
+**The free resources are labelled free**, deliberately and twice, so nobody
+wonders whether the calendar costs something.
+
+**The workshop runs on email.** Buyers send proof of purchase to
+`support@sunnysink.com` and get added by hand. The button is a `mailto:` with the
+subject and body already written, so all they do is attach the receipt.
 
 **The calendars are offered as subscriptions rather than downloads**, so a later
 correction reaches everyone who already subscribed. Google gets its own add-by-URL
