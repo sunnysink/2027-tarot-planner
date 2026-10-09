@@ -109,7 +109,7 @@
   <div class="band" style="margin-top:0;padding:26px 26px">
     <div class="kicker">High Priestess Tarot School</div>
     <h1>Your 2027 Astrology Events Calendar</h1>
-    <p class="lede">Every season, moon phase, Mercury retrograde and eclipse for 2027. <b>Pick your time zone and the dates and times move with you.</b></p>
+    <p class="lede">Every season, moon phase, Mercury retrograde and eclipse from October 2026 through December 2027. <b>Pick your time zone and the dates and times move with you.</b></p>
   </div>
 
   <div class="band">
@@ -140,6 +140,96 @@
 </div>
 <script>
 const EVENTS = [
+{
+"t":"2026-10-03T13:24:00Z",
+"k":"lq",
+"l":"Last Quarter Moon in Cancer"
+},
+{
+"t":"2026-10-10T15:50:00Z",
+"k":"new",
+"l":"New Moon in Libra"
+},
+{
+"t":"2026-10-18T16:12:00Z",
+"k":"fq",
+"l":"First Quarter Moon in Capricorn"
+},
+{
+"t":"2026-10-23T09:32:00Z",
+"k":"season",
+"l":"Scorpio Season Begins"
+},
+{
+"t":"2026-10-24T07:13:00Z",
+"k":"merc-begins",
+"l":"Mercury Retrograde Begins in Scorpio"
+},
+{
+"t":"2026-10-26T04:11:00Z",
+"k":"full",
+"l":"Full Moon in Taurus"
+},
+{
+"t":"2026-11-01T20:28:00Z",
+"k":"lq",
+"l":"Last Quarter Moon in Leo"
+},
+{
+"t":"2026-11-09T07:02:00Z",
+"k":"new",
+"l":"New Moon in Scorpio"
+},
+{
+"t":"2026-11-13T15:54:00Z",
+"k":"merc-ends",
+"l":"Mercury Retrograde Ends in Scorpio"
+},
+{
+"t":"2026-11-17T11:47:00Z",
+"k":"fq",
+"l":"First Quarter Moon in Aquarius"
+},
+{
+"t":"2026-11-22T07:18:00Z",
+"k":"season",
+"l":"Sagittarius Season Begins"
+},
+{
+"t":"2026-11-24T14:53:00Z",
+"k":"full",
+"l":"Full Moon in Gemini"
+},
+{
+"t":"2026-12-01T06:08:00Z",
+"k":"lq",
+"l":"Last Quarter Moon in Virgo"
+},
+{
+"t":"2026-12-09T00:51:00Z",
+"k":"new",
+"l":"New Moon in Sagittarius"
+},
+{
+"t":"2026-12-17T05:42:00Z",
+"k":"fq",
+"l":"First Quarter Moon in Pisces"
+},
+{
+"t":"2026-12-21T20:45:00Z",
+"k":"season",
+"l":"Capricorn Season Begins"
+},
+{
+"t":"2026-12-24T01:28:00Z",
+"k":"full",
+"l":"Full Moon in Cancer"
+},
+{
+"t":"2026-12-30T18:59:00Z",
+"k":"lq",
+"l":"Last Quarter Moon in Libra"
+},
 {
 "t":"2027-01-07T20:24:00Z",
 "k":"new",
@@ -559,10 +649,10 @@ function render(){
       const d = new Date(Date.UTC(y, m-1, dd, 12));
       const p = new Intl.DateTimeFormat("en-US",{timeZone:"UTC",month:"long",day:"numeric"}).formatToParts(d);
       const o={}; p.forEach(x=>o[x.type]=x.value);
-      key = o.month; day = o.month.slice(0,3)+" "+o.day; time = "date only"; sortT = e.t+"T12:00:00Z";
+      key = y+"|"+o.month; day = o.month.slice(0,3)+" "+o.day; time = "date only"; sortT = e.t+"T12:00:00Z";
     } else {
       const o = parts(e.t, tz);
-      key = new Intl.DateTimeFormat("en-US",{timeZone:tz,month:"long"}).format(new Date(e.t));
+      key = o.year+"|"+new Intl.DateTimeFormat("en-US",{timeZone:tz,month:"long"}).format(new Date(e.t));
       day = o.month+" "+o.day; time = o.hour+":"+o.minute+" "+o.dayPeriod; sortT = e.t;
     }
     if (!months.has(key)) months.set(key, []);
@@ -572,12 +662,16 @@ function render(){
   const order = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const list = document.getElementById("list");
   list.innerHTML = "";
-  order.forEach(m => {
-    if (!months.has(m)) return;
-    const items = months.get(m).sort((a,b)=> a.sortT < b.sortT ? -1 : 1);
+  const keys = [...months.keys()].sort((a,b)=>{
+    const [ya,ma]=a.split("|"), [yb,mb]=b.split("|");
+    return ya!==yb ? ya-yb : order.indexOf(ma)-order.indexOf(mb);
+  });
+  keys.forEach(k => {
+    const [yr, m] = k.split("|");
+    const items = months.get(k).sort((a,b)=> a.sortT < b.sortT ? -1 : 1);
     const wrap = document.createElement("div");
     wrap.className = "month";
-    wrap.innerHTML = `<div class="section-head"><div><h2>${m} 2027</h2></div>
+    wrap.innerHTML = `<div class="section-head"><div><h2>${m} ${yr}</h2></div>
       <span class="mcount">${items.length} event${items.length===1?"":"s"}</span></div>
       <div class="rows"></div>`;
     const rows = wrap.querySelector(".rows");
@@ -624,7 +718,7 @@ document.getElementById("useMine").addEventListener("click", () => {
 });
 document.getElementById("copy").addEventListener("click", (ev) => {
   const tz = sel.value;
-  const lines = ["2027 Astrology Events", "All times in " + pretty(tz), ""];
+  const lines = ["Astrology Events, October 2026 to December 2027", "All times in " + pretty(tz), ""];
   EVENTS.forEach(e => {
     const base = e.k.startsWith("merc") ? "merc" : e.k;
     if (!active.has(base)) return;
@@ -632,10 +726,10 @@ document.getElementById("copy").addEventListener("click", (ev) => {
       const [y,m,dd] = e.t.split("-").map(Number);
       const d = new Date(Date.UTC(y,m-1,dd,12));
       const s = new Intl.DateTimeFormat("en-US",{timeZone:"UTC",month:"short",day:"numeric"}).format(d);
-      lines.push(s + "\t(date only)\t" + e.l);
+      lines.push(s + ", " + y + "\t(date only)\t" + e.l);
     } else {
       const o = parts(e.t, tz);
-      lines.push(o.month+" "+o.day+"\t"+o.hour+":"+o.minute+" "+o.dayPeriod+"\t"+e.l);
+      lines.push(o.month+" "+o.day+", "+o.year+"\t"+o.hour+":"+o.minute+" "+o.dayPeriod+"\t"+e.l);
     }
   });
   const txt = lines.join("\n");
