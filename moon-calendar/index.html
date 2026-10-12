@@ -85,9 +85,12 @@ h1{font-family:var(--serif);font-size:clamp(30px,5vw,46px);font-weight:400;line-
   .noprint{display:none !important}
   .legend{margin:0 0 8px}
   .lg{background:none;border-color:#bbb}
-  .year{grid-template-columns:1fr 1fr;gap:10mm}
-  .month{background:none;box-shadow:none;border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid}
-  .month:nth-child(2n){page-break-after:always}
+  /* block, not grid: Safari on iPhone ignores page breaks inside a grid (Celeste, 10/12) */
+  .year{display:block}
+  .month{background:none;box-shadow:none;border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid;margin:0 0 6mm;padding:10px 14px 12px}
+  .month:nth-child(2n){break-after:page;page-break-after:always}
+  .month:last-child{break-after:auto;page-break-after:auto}
+  .c{min-height:30px}
   .c.has{background:#f4f4f4;border-color:#ccc}
   .g{print-color-adjust:exact;-webkit-print-color-adjust:exact}
 }
