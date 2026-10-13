@@ -83,15 +83,23 @@ h1{font-family:var(--serif);font-size:clamp(30px,5vw,46px);font-weight:400;line-
   @page{size:letter portrait;margin:12mm}
   body{background:#fff;padding:0}
   .noprint{display:none !important}
-  .legend{margin:0 0 8px}
+  .legend{margin:0 0 4px}
+  .year{margin-top:0}
   .lg{background:none;border-color:#bbb}
   /* block, not grid: Safari on iPhone ignores page breaks inside a grid (Celeste, 10/12) */
   .year{display:block}
-  .month{background:none;box-shadow:none;border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid;margin:0 0 6mm;padding:10px 14px 12px}
-  .month:nth-child(2n){break-after:page;page-break-after:always}
+  /* every month is the same fixed height, so two always fit a letter page: months differ in
+     rows (5 or 6) and events (5 to 7), and Safari sent the tall pairs to a page each (Celeste, 10/13) */
+  .month{background:none;box-shadow:none;border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid;
+    margin:0 0 5mm;padding:8px 14px 8px;height:113mm;box-sizing:border-box;overflow:hidden}
+  .month:nth-child(2n){break-after:page;page-break-after:always;margin-bottom:0}
   .month:last-child{break-after:auto;page-break-after:auto}
-  .c{min-height:30px}
+  .month h2{font-size:18px;margin-bottom:6px}
+  .wd{padding-bottom:2px}
+  .c{min-height:22px;padding:2px 3px}
   .c.has{background:#f4f4f4;border-color:#ccc}
+  .evs{margin-top:7px;padding-top:5px}
+  .evs li{font-size:11px;line-height:1.3;padding:1px 0}
   .g{print-color-adjust:exact;-webkit-print-color-adjust:exact}
 }
 </style>
